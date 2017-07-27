@@ -4,34 +4,19 @@ import * as actions from 'Actions'
 
 const mapStateToProps = ( state, props ) => {
     return {
-      ...state.Application
+      ...state.Application,
+      comments: ["foo", "Bar", "biz"]
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
 
-  //This is here for convenience.
-
-  // var exceptions = {
-  //   //If you need to, add an exception here.
-  //   // eg:
-  //   // myFunction:function someExample(){}
-  // };
-
-  // Object.keys(actions).forEach((key) => {
-  //   var functionObj;
-  //   if (key in exceptions) {
-  //     actions[key] = exceptions[key];
-  //   }else{
-  //     functionObj = actions[key];
-  //     actions[key] = function(){
-  //       dispatch(functionObj.apply(null,arguments));
-  //     };
-  //   }
-  // });
-
   // return actions;
-  return {};
+  return {
+    userSignInStart: function(){
+      dispatch({type: "USER_SIGNIN_START"})
+    }
+  };
 }
 
 const ApplicationContainer = connect(

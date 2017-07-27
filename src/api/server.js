@@ -3,7 +3,6 @@ const colors             = require('colors');
 const figlet             = Promise.promisify(require('figlet'));
 const morgan             = require('morgan');
 const express            = require("express");
-const db                 = require('../../models');//Bootstraps the entire database.
 const bodyParser         = require('body-parser');
 const app                = express();
 const path               = require('path');
@@ -24,13 +23,8 @@ figlet(introAscii,{font:asciiFont})
   console.log(introMessage.green);
 })
 .then(nothing =>{
-  db.sequelize
-    .sync()
-    .then(()=>{
 
       if (!IS_PRODUCTION) require('./bundler.js')(app); //Webpack
-
-      app.set('models',db.sequelize.models);
 
       app.use(bodyParser.json({
         extended:true //see:https://www.npmjs.com/package/body-parser
@@ -52,9 +46,4 @@ figlet(introAscii,{font:asciiFont})
       app.listen(PORT, function () {
         console.log('Server running on port ' + PORT);
       });
-    }
-  );
 })
-
-
-

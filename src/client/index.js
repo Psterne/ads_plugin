@@ -29,6 +29,9 @@ import {
 
 import App                   from 'Containers/ApplicationContainer'
 
+
+
+
 const store = createStore(
   combineReducers({
     Application,
@@ -36,6 +39,9 @@ const store = createStore(
   }),
   // applyMiddleware(thunk) see: http://redux.js.org/docs/advanced/Middleware.html
 );
+
+setTimeout(()=>{store.dispatch({type: 'LOADING_START'})}, 3000)
+setTimeout(()=>{store.dispatch({type: 'LOADING_FINISH'})}, 10000)
 
 const history = syncHistoryWithStore(hashHistory, store);
 
