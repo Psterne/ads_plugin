@@ -5,7 +5,8 @@ import * as actions from 'Actions'
 const mapStateToProps = ( state, props ) => {
     return {
       ...state.Application,
-      comments: ["foo", "Bar", "biz"]
+      username: "myName",
+      password: "supersecret"
     }
 }
 

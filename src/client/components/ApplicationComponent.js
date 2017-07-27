@@ -14,6 +14,16 @@ class UserLogin extends React.Component {
   }
 }
 
+function PrivacyViolator({username, password}){
+  return (
+    <div>
+      { username }
+      { password }
+    </div>
+  )
+}
+
+
 class UserPwd extends React.Component {
   constructor() {
     super();
@@ -67,12 +77,13 @@ function Comment({val}){
   return <div>{val}</div>
 }
 
-function ApplicationComponent({is_loading, userSignInStart, comments=[]}){
+function ApplicationComponent({is_loading, userSignInStart, username, password}){
     return <div className="shopping-list">
         {
           is_loading && <h1> {'LOADING!!!'} </h1>
         }
         <h1>Log In</h1>
+        <PrivacyViolator username={username} password={password}/>
         <UserLogin>
         </UserLogin>
         <UserPwd>
@@ -80,14 +91,6 @@ function ApplicationComponent({is_loading, userSignInStart, comments=[]}){
         <button className="square" onClick={() => alert('click')}>
           "heeeey will"
         </button>
-
-        <CommentList>
-          {
-            comments.map((comment,index) => (
-            <Comment val={comment} key={index} />
-            ))
-          }
-        </CommentList>
       </div>
 
 }
