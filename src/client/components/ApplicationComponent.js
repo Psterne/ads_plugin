@@ -1,17 +1,12 @@
 import React from 'react';
 export default ApplicationComponent;
 
-class UserLogin extends React.Component {
-  constructor() {
-    super();
-  }
-  render() {
-    return (
-      <div className="userLogin">
-        <input type="text" />
-      </div>
-    )
-  }
+function UserLogin({onKeyUp}){
+  return (
+    <div className="userLogin">
+      <input type="text" onKeyUp={onKeyUp}/>
+    </div>
+  )
 }
 
 function PrivacyViolator({username, password}){
@@ -24,17 +19,12 @@ function PrivacyViolator({username, password}){
 }
 
 
-class UserPwd extends React.Component {
-  constructor() {
-    super();
-  }
-  render() {
-    return (
-      <div className="userPwd">
-        <input type="text" />
-      </div>
-    )
-  }
+function UserPwd({onKeyUp}){
+  return (
+    <div className="userPwd">
+      <input type="text" onKeyUp={onKeyUp}/>
+    </div>
+  )
 }
 
 class CommentList extends React.Component {
@@ -77,18 +67,20 @@ function Comment({val}){
   return <div>{val}</div>
 }
 
-function ApplicationComponent({is_loading, userSignInStart, username, password}){
+function ApplicationComponent({is_loading, userSignInStart, username, password, userClickedHandler, userLoginKeyUp, userPwdKeyUp}){
+    debugger
     return <div className="shopping-list">
         {
           is_loading && <h1> {'LOADING!!!'} </h1>
         }
         <h1>Log In</h1>
         <PrivacyViolator username={username} password={password}/>
-        <UserLogin>
+        <UserLogin onKeyUp={(ev)=>userLoginKeyUp(ev.target.value)}>
         </UserLogin>
-        <UserPwd>
+        <UserPwd onKeyUp={(ev)=>userPwdKeyUp(ev.target.value)}>
         </UserPwd>
-        <button className="square" onClick={() => alert('click')}>
+
+        <button className="square" onClick={()=>userClickedHandler()}>
           "heeeey will"
         </button>
       </div>
