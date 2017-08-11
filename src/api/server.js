@@ -34,6 +34,12 @@ figlet(introAscii,{font:asciiFont})
         res.sendFile(path.join(__dirname,"../../dist/index.html"));
       });
 
+
+      app.post('/login', function(req, res) {
+        console.log("hello world")
+        console.log("hello world")
+      });
+
       app.use(serveStatic(path.join(__dirname,"../../dist")));
 
       app.use(function(req,res,next){// If you get here, then nothing was able to field the request.

@@ -1,6 +1,6 @@
 import React                  from 'react';
 import { Provider }           from 'react-redux';
-import Application            from 'Reducers/Application';
+import ApplicationReducer     from 'Reducers/Application';
 import Promise                from 'promise-polyfill';
 import { ReactDOM,
          render }             from 'react-dom';
@@ -34,7 +34,7 @@ import App                   from 'Containers/ApplicationContainer'
 
 const store = createStore(
   combineReducers({
-    Application,
+    Application: ApplicationReducer,
     routing: routerReducer
   }),
   // applyMiddleware(thunk) see: http://redux.js.org/docs/advanced/Middleware.html
