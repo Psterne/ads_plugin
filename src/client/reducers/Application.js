@@ -14,8 +14,17 @@ const Application = (state=initialState, action) =>  {
       is_loading: false,
     }
   case 'USER_LOGIN_BUTTON_CLICK':
+    var foo = state;
     debugger
-    fetch('/login', {method: 'POST'}).then(console.log)
+    fetch('/login', {
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({username: state.userLogin, password: state.userPassword})
+    }).then(
+    ).catch()
     return {
       ...state,
       clicked_login_button: true

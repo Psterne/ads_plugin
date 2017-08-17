@@ -10,8 +10,8 @@ const serveStatic        = express.static;
 const PORT               = 8080;
 const middlwareError     = 'You made it to the no-no middleware. If you\'re confused, see:http://expressjs.com/en/guide/using-middleware.html';
 const IS_PRODUCTION      = false;
-const introAscii         = '   POWr';
-const introAscii2        = 'Comments';
+const introAscii         = '   Code';
+const introAscii2        = 'School';
 const asciiFont          = 'Isometric2';
 
 figlet(introAscii,{font:asciiFont})
@@ -28,7 +28,8 @@ figlet(introAscii,{font:asciiFont})
 
       app.use(bodyParser.json({
         extended:true //see:https://www.npmjs.com/package/body-parser
-      }));
+      }))
+      .use(bodyParser())
 
       app.get('/', function(req, res) {
         res.sendFile(path.join(__dirname,"../../dist/index.html"));
@@ -36,8 +37,17 @@ figlet(introAscii,{font:asciiFont})
 
 
       app.post('/login', function(req, res) {
-        console.log("hello world")
-        console.log("hello world")
+        const users = [{username: "Aigul", password: "123"}, {username: "Pilar", password: "345"}]
+        var result;
+        users.forEach(function(user){
+          if (user.username === req.body.username && user.password === req.body.password) {
+            result = "user exists"
+          }
+        })
+        if (!result) {
+          result = "user doesn't exist"
+        }
+        console.log(result)
       });
 
       app.use(serveStatic(path.join(__dirname,"../../dist")));

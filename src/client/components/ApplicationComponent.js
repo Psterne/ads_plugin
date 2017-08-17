@@ -9,6 +9,14 @@ function UserLogin({onKeyUp}){
   )
 }
 
+function UserPwd({onKeyUp}){
+  return (
+    <div className="userPwd">
+      <input type="text" onKeyUp={onKeyUp}/>
+    </div>
+  )
+}
+
 function PrivacyViolator({username, password}){
   return (
     <div>
@@ -18,14 +26,6 @@ function PrivacyViolator({username, password}){
   )
 }
 
-
-function UserPwd({onKeyUp}){
-  return (
-    <div className="userPwd">
-      <input type="text" onKeyUp={onKeyUp}/>
-    </div>
-  )
-}
 
 class CommentList extends React.Component {
   constructor() {
@@ -81,7 +81,7 @@ function ApplicationComponent({is_loading, userSignInStart, username, password, 
         </UserPwd>
 
         <button className="square" onClick={()=>userClickedHandler()}>
-          "heeeey will"
+          Click Me
         </button>
       </div>
 
