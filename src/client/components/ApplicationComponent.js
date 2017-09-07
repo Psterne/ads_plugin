@@ -1,31 +1,31 @@
 import React from 'react';
 export default ApplicationComponent;
 
-class UserLogin extends React.Component {
-  constructor() {
-    super();
-  }
-  render() {
-    return (
-      <div className="userLogin">
-        <input type="text" />
-      </div>
-    )
-  }
+function UserLogin({onKeyUp}){
+  return (
+    <div className="userLogin">
+      <input type="text" onKeyUp={onKeyUp}/>
+    </div>
+  )
 }
 
-class UserPwd extends React.Component {
-  constructor() {
-    super();
-  }
-  render() {
-    return (
-      <div className="userPwd">
-        <input type="text" />
-      </div>
-    )
-  }
+function UserPwd({onKeyUp}){
+  return (
+    <div className="userPwd">
+      <input type="text" onKeyUp={onKeyUp}/>
+    </div>
+  )
 }
+
+function PrivacyViolator({username, password}){
+  return (
+    <div>
+      { username }
+      { password }
+    </div>
+  )
+}
+
 
 class CommentList extends React.Component {
   constructor() {
@@ -67,27 +67,22 @@ function Comment({val}){
   return <div>{val}</div>
 }
 
-function ApplicationComponent({is_loading, userSignInStart, comments=[]}){
+function ApplicationComponent({is_loading, userSignInStart, username, password, userClickedHandler, userLoginKeyUp, userPwdKeyUp}){
+    debugger
     return <div className="shopping-list">
         {
           is_loading && <h1> {'LOADING!!!'} </h1>
         }
         <h1>Log In</h1>
-        <UserLogin>
+        <PrivacyViolator username={username} password={password}/>
+        <UserLogin onKeyUp={(ev)=>userLoginKeyUp(ev.target.value)}>
         </UserLogin>
-        <UserPwd>
+        <UserPwd onKeyUp={(ev)=>userPwdKeyUp(ev.target.value)}>
         </UserPwd>
-        <button className="square" onClick={() => alert('click')}>
-          "heeeey will"
-        </button>
 
-        <CommentList>
-          {
-            comments.map((comment,index) => (
-            <Comment val={comment} key={index} />
-            ))
-          }
-        </CommentList>
+        <button className="square" onClick={()=>userClickedHandler()}>
+          Click Me
+        </button>
       </div>
 
 }

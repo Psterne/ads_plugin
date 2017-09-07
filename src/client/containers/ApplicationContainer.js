@@ -3,9 +3,11 @@ import ApplicationComponent from 'Components/ApplicationComponent'
 import * as actions from 'Actions'
 
 const mapStateToProps = ( state, props ) => {
+    debugger
     return {
       ...state.Application,
-      comments: ["foo", "Bar", "biz"]
+      username: state.Application.userLogin,
+      password: state.Application.userPassword
     }
 }
 
@@ -15,8 +17,18 @@ const mapDispatchToProps = (dispatch) => {
   return {
     userSignInStart: function(){
       dispatch({type: "USER_SIGNIN_START"})
+    },
+    userClickedHandler: function() {
+      dispatch({type: "USER_LOGIN_BUTTON_CLICK"})
+    },
+    userLoginKeyUp: function(value) {
+      dispatch({type: "USER_GAVE_LOGIN_NAME", value })
+    },
+    userPwdKeyUp: function(value) {
+      dispatch({type: "USER_GAVE_LOGIN_PASSWORD", value })
     }
   };
+
 }
 
 const ApplicationContainer = connect(
