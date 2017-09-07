@@ -3,9 +3,9 @@ import ApplicationComponent from 'Components/ApplicationComponent'
 import * as actions from 'Actions'
 
 const mapStateToProps = ( state, props ) => {
-    debugger
     return {
       ...state.Application,
+      todoList: state.Application.todoList,
       username: state.Application.userLogin,
       password: state.Application.userPassword
     }
@@ -24,16 +24,19 @@ const mapDispatchToProps = (dispatch) => {
     userLoginKeyUp: function(value) {
       dispatch({type: "USER_GAVE_LOGIN_NAME", value })
     },
-    userPwdKeyUp: function(value) {
-      dispatch({type: "USER_GAVE_LOGIN_PASSWORD", value })
+    newTodoInputKeyUp: function(value) {
+      dispatch({type: "NEW_TODO_INPUT_KEY_UP", value })
+    },
+    newTodoOnButtonClick: function() {
+      dispatch({type: "NEW_TODO_BUTTON_CLICK"})
     }
   };
 
 }
 
-const ApplicationContainer = connect(
+const Junction = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ApplicationComponent)
 
-export default ApplicationContainer
+export default Junction

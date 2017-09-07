@@ -27,7 +27,7 @@ import {
 } from 'Actions';
 
 
-import App                   from 'Containers/ApplicationContainer'
+import App                   from './redux/junction'
 
 
 
