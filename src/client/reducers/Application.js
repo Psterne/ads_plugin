@@ -42,9 +42,34 @@ const Application = (state=initialState, action) =>  {
   case 'NEW_TODO_BUTTON_CLICK':
     return {
       ...state,
-      todoList: state.todoList.concat(state.inputValue),
+      todoList: state.todoList.concat({"name": state.inputValue, "id": Math.random()}),
       inputValue: '',
     }
+  case 'DELETE_TODO':
+    const theTodoItemThatWeWantToFilterId = action.todoId
+    function checkIds(todoItem) {
+      return theTodoItemThatWeWantToFilterId !== todoItem.id
+    }
+    return {
+      ...state,
+      todoList: state.todoList.filter(checkIds)
+    }
+  case 'UPDATE_TODO':
+    function updateTodos(todoItem) {
+      debugger
+      if(todoItem.id === action.todoId) {
+        return {
+          id: action.todoId,
+          name: state.inputValue
+        }
+      }
+      return todoItem
+    }
+    return {
+      ...state,
+      todoList: state.todoList.map(updateTodos)
+    }
+
   default:
       return state
   }

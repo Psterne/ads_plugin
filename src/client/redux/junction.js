@@ -29,6 +29,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     newTodoOnButtonClick: function() {
       dispatch({type: "NEW_TODO_BUTTON_CLICK"})
+    },
+    deleteATodoItemOnButtonClick: function(todoId) {
+      dispatch({type: "DELETE_TODO", todoId})
+    },
+    updateATodoItemOnButtonClick: function(todoId) {
+      dispatch({type: 'UPDATE_TODO', todoId})
     }
   };
 

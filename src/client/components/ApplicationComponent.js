@@ -67,13 +67,16 @@ function Comment({val}){
   return <div>{val}</div>
 }
 
-function TodoList({listOfTodos}) {
+function TodoList({listOfTodos, onDeleteItemClick, onUpdateItemClick}) {
+  debugger
   return (
     <ul>
     {
-      listOfTodos.map((child, index) => (
+      listOfTodos.map((todoItem, index) => (
           <li key={index}>
-            {child}
+            {todoItem.name}
+            <button onClick={function(){onDeleteItemClick(todoItem.id)}}>Delete</button>
+            <button onClick={function(){debugger;onUpdateItemClick(todoItem.id)}}>Update</button>
           </li>
       ))
     }
@@ -91,7 +94,9 @@ function ApplicationComponent({
   password,
   userClickedHandler,
   userLoginKeyUp,
-  userPwdKeyUp
+  userPwdKeyUp,
+  deleteATodoItemOnButtonClick,
+  updateATodoItemOnButtonClick
 }){
     return <div className="shopping-list">
         {
@@ -100,7 +105,7 @@ function ApplicationComponent({
         <h1>Todo List</h1>
         <TodoInputThingy onKeyUp={(ev)=>newTodoInputKeyUp(ev.target.value)}>
         </TodoInputThingy>
-        <TodoList listOfTodos={todoList}/>
+        <TodoList listOfTodos={todoList} onUpdateItemClick={updateATodoItemOnButtonClick} onDeleteItemClick={deleteATodoItemOnButtonClick}/>
 
         <button className="square" onClick={()=>newTodoOnButtonClick()}>
           Click Me
