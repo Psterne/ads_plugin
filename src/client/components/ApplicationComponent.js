@@ -9,7 +9,7 @@ function UserLogin({onKeyUp}){
   )
 }
 
-function UserPwd({onKeyUp}){
+function TodoInputThingy({onKeyUp}){
   return (
     <div className="userPwd">
       <input type="text" onKeyUp={onKeyUp}/>
@@ -67,20 +67,42 @@ function Comment({val}){
   return <div>{val}</div>
 }
 
-function ApplicationComponent({is_loading, userSignInStart, username, password, userClickedHandler, userLoginKeyUp, userPwdKeyUp}){
-    debugger
+function TodoList({listOfTodos}) {
+  return (
+    <ul>
+    {
+      listOfTodos.map((child, index) => (
+          <li key={index}>
+            {child}
+          </li>
+      ))
+    }
+    </ul>
+  )
+}
+
+function ApplicationComponent({
+  todoList,
+  newTodoOnButtonClick,
+  newTodoInputKeyUp,
+  is_loading,
+  userSignInStart,
+  username,
+  password,
+  userClickedHandler,
+  userLoginKeyUp,
+  userPwdKeyUp
+}){
     return <div className="shopping-list">
         {
           is_loading && <h1> {'LOADING!!!'} </h1>
         }
-        <h1>Log In</h1>
-        <PrivacyViolator username={username} password={password}/>
-        <UserLogin onKeyUp={(ev)=>userLoginKeyUp(ev.target.value)}>
-        </UserLogin>
-        <UserPwd onKeyUp={(ev)=>userPwdKeyUp(ev.target.value)}>
-        </UserPwd>
+        <h1>Todo List</h1>
+        <TodoInputThingy onKeyUp={(ev)=>newTodoInputKeyUp(ev.target.value)}>
+        </TodoInputThingy>
+        <TodoList listOfTodos={todoList}/>
 
-        <button className="square" onClick={()=>userClickedHandler()}>
+        <button className="square" onClick={()=>newTodoOnButtonClick()}>
           Click Me
         </button>
       </div>

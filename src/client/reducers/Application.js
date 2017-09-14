@@ -1,5 +1,6 @@
 const initialState = {
-    TOTALLY_SILLY_STATE:'Hello World'
+    TOTALLY_SILLY_STATE:'Hello World',
+    todoList: [],
 };
 const Application = (state=initialState, action) =>  {
   switch (action.type){
@@ -14,8 +15,6 @@ const Application = (state=initialState, action) =>  {
       is_loading: false,
     }
   case 'USER_LOGIN_BUTTON_CLICK':
-    var foo = state;
-    debugger
     fetch('/login', {
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -35,10 +34,16 @@ const Application = (state=initialState, action) =>  {
       ...state,
       userLogin: action.value
     }
-  case 'USER_GAVE_LOGIN_PASSWORD':
+  case 'NEW_TODO_INPUT_KEY_UP':
     return {
       ...state,
-      userPassword: action.value
+      inputValue: action.value
+    }
+  case 'NEW_TODO_BUTTON_CLICK':
+    return {
+      ...state,
+      todoList: state.todoList.concat(state.inputValue),
+      inputValue: '',
     }
   default:
       return state
