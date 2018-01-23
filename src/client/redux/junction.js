@@ -7,7 +7,8 @@ const mapStateToProps = ( state, props ) => {
       ...state.Application,
       todoList: state.Application.todoList,
       username: state.Application.userLogin,
-      password: state.Application.userPassword
+      password: state.Application.userPassword,
+      sliderValue: state.Application.sliderValue,
     }
 }
 
@@ -15,6 +16,11 @@ const mapDispatchToProps = (dispatch) => {
 
   // return actions;
   return {
+    sliderSlideStop: function(sliderPosition) {
+      console.log('sliderPosition')
+      console.log(sliderPosition)
+      dispatch({type: "SLIDER_STOP_CHANGED", sliderPosition})
+    },
     userSignInStart: function(){
       dispatch({type: "USER_SIGNIN_START"})
     },

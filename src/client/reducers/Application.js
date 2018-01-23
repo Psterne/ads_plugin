@@ -1,6 +1,7 @@
 const initialState = {
     TOTALLY_SILLY_STATE:'Hello World',
     todoList: [],
+    sliderValue: 5,
 };
 const Application = (state=initialState, action) =>  {
   switch (action.type){
@@ -61,6 +62,14 @@ const Application = (state=initialState, action) =>  {
       todoList: state.todoList.concat({"name": state.inputValue, "id": Math.random(), "parentId": action.parentId}),
       inputValue: '',
     }
+
+  case 'SLIDER_STOP_CHANGED':
+    console.log(action)
+    return {
+      ...state,
+      sliderValue: action.sliderPosition,
+    }
+
 
   default:
       return state

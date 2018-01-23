@@ -112,7 +112,9 @@ function ApplicationComponent({
   userPwdKeyUp,
   deleteATodoItemOnButtonClick,
   updateATodoItemOnButtonClick,
-  onBangItemClick
+  onBangItemClick,
+  sliderValue,
+  sliderSlideStop,
 }){
     return <div className="shopping-list">
         {
@@ -126,11 +128,21 @@ function ApplicationComponent({
         <button className="square" onClick={()=>newTodoOnButtonClick()}>
           Click Me
         </button>
+        <PowrButton
+          onClick={()=>console.log('I am clicked')}
+          buttonStyles={{
+            backgroundColor: 'purple',
+            height: '100px',
+            width: '100px',
+            borderRadius: sliderValue,
+          }}
+          content={'My Button'}
+        />
         <Slider
-          value={5}
+          value={sliderValue}
           min={1}
           max={5}
-          onChange={function(){console.log('onChange', arguments)}}
+          onChange={sliderSlideStop}
           ticks
           markerLabel={[]}/>
       </div>
