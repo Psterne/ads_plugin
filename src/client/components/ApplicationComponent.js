@@ -1,4 +1,5 @@
 import React from 'react';
+import Slider from 'nw-react-slider';
 export default ApplicationComponent;
 
 function UserLogin({onKeyUp}){
@@ -6,6 +7,12 @@ function UserLogin({onKeyUp}){
     <div className="userLogin">
       <input type="text" onKeyUp={onKeyUp}/>
     </div>
+  )
+}
+
+function PowrButton({onClick, buttonStyles, content}){
+  return (
+      <button style={buttonStyles} onClick={onClick}>{content}</button>
   )
 }
 
@@ -67,18 +74,26 @@ function Comment({val}){
   return <div>{val}</div>
 }
 
-function TodoList({listOfTodos, onDeleteItemClick, onUpdateItemClick}) {
-  debugger
+function TodoList({
+listOfTodos,
+onDeleteItemClick,
+onUpdateItemClick,
+onBangItemClick
+}) {
   return (
     <ul>
     {
-      listOfTodos.map((todoItem, index) => (
-          <li key={index}>
+      listOfTodos.map((todoItem, index) => {
+          var myLiStyles = todoItem.parentId ? {paddingLeft: "20px"} : null
+          return (
+          <li key={index} style={myLiStyles}>
             {todoItem.name}
             <button onClick={function(){onDeleteItemClick(todoItem.id)}}>Delete</button>
-            <button onClick={function(){debugger;onUpdateItemClick(todoItem.id)}}>Update</button>
+            <button onClick={function(){onUpdateItemClick(todoItem.id)}}>Update</button>
+            <button onClick={function(){onBangItemClick(todoItem.id)}}>Make Child</button>
           </li>
-      ))
+          )
+      })
     }
     </ul>
   )
@@ -96,7 +111,8 @@ function ApplicationComponent({
   userLoginKeyUp,
   userPwdKeyUp,
   deleteATodoItemOnButtonClick,
-  updateATodoItemOnButtonClick
+  updateATodoItemOnButtonClick,
+  onBangItemClick
 }){
     return <div className="shopping-list">
         {
@@ -105,11 +121,19 @@ function ApplicationComponent({
         <h1>Todo List</h1>
         <TodoInputThingy onKeyUp={(ev)=>newTodoInputKeyUp(ev.target.value)}>
         </TodoInputThingy>
-        <TodoList listOfTodos={todoList} onUpdateItemClick={updateATodoItemOnButtonClick} onDeleteItemClick={deleteATodoItemOnButtonClick}/>
+        <TodoList listOfTodos={todoList} onUpdateItemClick={updateATodoItemOnButtonClick} onDeleteItemClick={deleteATodoItemOnButtonClick} onBangItemClick={onBangItemClick}/>
 
         <button className="square" onClick={()=>newTodoOnButtonClick()}>
           Click Me
         </button>
+        <Slider
+          value={5}
+          min={1}
+          max={5}
+          onChange={function(){console.log('onChange', arguments)}}
+          ticks
+          markerLabel={[]}/>
       </div>
+
 
 }

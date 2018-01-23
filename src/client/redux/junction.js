@@ -35,6 +35,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateATodoItemOnButtonClick: function(todoId) {
       dispatch({type: 'UPDATE_TODO', todoId})
+    },
+    onBangItemClick: function(parentId) {
+      dispatch({type: 'MAKE_CHILD', parentId})
     }
   };
 

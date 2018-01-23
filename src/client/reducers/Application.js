@@ -54,20 +54,12 @@ const Application = (state=initialState, action) =>  {
       ...state,
       todoList: state.todoList.filter(checkIds)
     }
-  case 'UPDATE_TODO':
-    function updateTodos(todoItem) {
-      debugger
-      if(todoItem.id === action.todoId) {
-        return {
-          id: action.todoId,
-          name: state.inputValue
-        }
-      }
-      return todoItem
-    }
+
+  case 'MAKE_CHILD':
     return {
       ...state,
-      todoList: state.todoList.map(updateTodos)
+      todoList: state.todoList.concat({"name": state.inputValue, "id": Math.random(), "parentId": action.parentId}),
+      inputValue: '',
     }
 
   default:
